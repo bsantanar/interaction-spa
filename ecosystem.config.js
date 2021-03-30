@@ -1,6 +1,6 @@
 module.exports = {
   apps : [{
-      name: "interaction",
+      name: "spa",
       script: "serve",
       env: {
           PM2_SERVE_PATH: './dist',
