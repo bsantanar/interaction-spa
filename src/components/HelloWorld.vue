@@ -7,7 +7,7 @@
               :class="{ 'on-hover': hover }"
             >
               <v-img
-                src="@/assets/header-glove.jpg"
+                :src="require(`../assets/${info.header}`)"
                 max-height="400"
               >
                 <v-expand-transition>
@@ -43,7 +43,7 @@
       >
 
         <v-img
-          src="@/assets/about-glove.jpg"
+          :src="require(`../assets/${info.about}`)"
           aspect-ratio="1.7"
           contain
         ></v-img>
@@ -59,7 +59,7 @@
           >
             <v-img
               :aspect-ratio="16/9"
-              src="@/assets/mission.png"
+              :src="require(`../assets/${info.mission}`)"
             >
               <v-expand-transition>
                 <div
@@ -94,7 +94,7 @@
           >
             <v-img
               :aspect-ratio="16/9"
-              src="@/assets/objective.jpg"
+              :src="require(`../assets/${info.objective}`)"
             >
               <v-expand-transition>
                 <div
@@ -129,7 +129,7 @@
           >
             <v-img
               :aspect-ratio="16/9"
-              src="@/assets/purpose.png"
+              :src="require(`../assets/${info.purpose}`)"
             >
               <v-expand-transition>
                 <div
@@ -196,7 +196,8 @@ import info from "../assets/info.json";
 export default {
   name: 'HelloWorld',
   data: () => ({
-    items: []
+    items: [],
+    info
   }),
   mounted() {
     this.items = info.carousel.map(a => {
