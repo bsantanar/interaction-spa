@@ -1,17 +1,33 @@
 <template>
-    <article>
+    <article :style="background">
 		<figure>
 		<h2>{{person.fullName}}</h2>
 			<p>{{person.degree}}</p>
 		</figure>
 		<!-- <img alt v-bind:src="person.image" /> -->
-		<img alt :src="person.image" />
+		<img alt :src="person.image" :style="img" />
 	</article>
 </template>
 <script>
 export default {
     name: "HoneyComb",
     props: ["person"],
+	computed: {
+		img(){
+			if(!this.person.active) return {"opacity": "80%"}
+			return {};
+		},
+		background(){
+			if(!this.person.active){
+				return {
+					"background": "#6b6d70"
+				}
+			}
+			return {
+				"background": "#0D47A1"
+			}
+		}
+	}
 }
 </script>
 <style>
