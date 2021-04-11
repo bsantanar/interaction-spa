@@ -96,7 +96,7 @@ export default {
             this.people = this.people.map( r => {
                   return {
                       ...r,
-                      image: r.image ? Buffer.from(r.image) : 'null'
+                      image: r.image ? '' + Buffer.from(r.image) : undefined
                   }
             })
                 this.categories = this.people.flatMap(p => p.category)

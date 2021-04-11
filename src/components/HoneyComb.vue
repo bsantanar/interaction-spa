@@ -4,8 +4,8 @@
 		<h2>{{person.fullName}}</h2>
 			<p>{{person.degree}}</p>
 		</figure>
-		<!-- <img alt v-bind:src="person.image" /> -->
-		<img alt :src="person.image" :style="img" />
+		<img v-if="person.image" alt :src="person.image" :style="img" />
+		<img v-else alt src="@/assets/default.jpg" :style="img" />
 	</article>
 </template>
 <script>
