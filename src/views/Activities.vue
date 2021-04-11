@@ -138,12 +138,9 @@ export default {
                         image: r.image ? '' + Buffer.from(r.image) : undefined
                     }
                 })
-                this.cards.forEach( c => {
-                    if(!this.categories.find(
-                        cat => cat.name == c.category.name )){
-                        this.categories.push(c.category)
-                    }
-                })
+                this.categories = this.cards.flatMap(c => c.category)
+                            .filter((v, i, a) => 
+                            a.findIndex(t =>  t._id === v._id) === i)
             })
             .catch(err => {
                 console.error("axios err", err)

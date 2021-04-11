@@ -99,7 +99,7 @@
                         v-for="category in filterCategories"
                         :key="category._id"
                         >
-                            <h1 v-if="filterPublications.find(p => p.category.name === category.name)" 
+                            <h1 v-if="filterPublications.find(p => p.category.some(c => c.name == category.name))" 
                             class="text-center">
                                 {{category.name}}
                             </h1>
@@ -113,7 +113,7 @@
                             :key="card.title"
                             :card="card"
                             class="ma-5">
-                                <li v-if="card.category.name === category.name">
+                                <li v-if="card.category.some(c => c.name == category.name)">
                                     {{card.author}}({{card.year}})
                                     .{{card.title}}.{{card.description}}
                                     {{card.editorial ? `[${card.editorial}]` : ''}}
@@ -156,12 +156,9 @@ export default {
                 this.years = this.cards.map( c => c.year )
                                 .filter((value, index, self) => self.indexOf(value) === index)
                                 .sort((a, b) => a - b)
-                this.cards.forEach( c => {
-                    if(!this.categories.find(
-                        cat => cat.name == c.category.name )){
-                        this.categories.push(c.category)
-                    }
-                })
+                this.categories = this.cards.flatMap(c => c.category)
+                            .filter((v, i, a) => 
+                            a.findIndex(t =>  t._id === v._id) === i)
             })
             .catch(err => {
                 console.error("axios err", err)

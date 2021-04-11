@@ -29,15 +29,21 @@
         </section>
         <v-container style="max-width: 1200px;">
           <v-row 
+          v-for="category in categories"
+          :key="category"
           >
             <v-col>
+              <h1>{{category}}</h1>
             <v-list three-line elevation="2">
               <v-subheader
-              >{{this.$parent.$parent.$parent.language.memberDetails}}</v-subheader>
+              >{{category}}</v-subheader>
             <template v-for="(item, index) in people">
 
-
+              <v-divider 
+              v-if="item.category.some(c => c.name == category)"
+              :key="index"></v-divider>
               <v-list-item
+                v-if="item.category.some(c => c.name == category)"
                 :key="item._id"
               >
                 <v-list-item-avatar>
@@ -60,7 +66,6 @@
                   </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
-              <v-divider :key="index"></v-divider>
             </template>
             </v-list>
             </v-col>
@@ -94,11 +99,10 @@ export default {
                       image: r.image ? Buffer.from(r.image) : 'null'
                   }
             })
-            this.people.forEach( c => {
-                if(this.categories.indexOf(c.category) === -1){
-                    this.categories.push(c.category)
-                }
-            })
+                this.categories = this.people.flatMap(p => p.category)
+                            .filter((v, i, a) => 
+                            a.findIndex(t =>  t._id === v._id) === i)
+                            .map( p => p.name)
           })
           .catch(err => {
               console.error("axios err", err)
