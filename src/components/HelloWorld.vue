@@ -214,7 +214,7 @@
     <v-row class="text-center">
       <v-card
         v-if="revealMission"
-        class="transition-fast-in-fast-out v-card--reveal-expand"
+        class="transition-fast-in-fast-out"
       >
         <v-card-text>
           <p class="display-1 text--primary">
@@ -229,7 +229,7 @@
     <v-row class="text-center">
       <v-card
         v-if="revealObjective"
-        class="transition-fast-in-fast-out v-card--reveal-expand"
+        class="transition-fast-in-fast-out"
       >
         <v-card-text>
           <p class="display-1 text--primary">
@@ -244,7 +244,7 @@
     <v-row class="text-center">
       <v-card
         v-if="revealPurpose"
-        class="transition-fast-in-fast-out v-card--reveal-expand"
+        class="transition-fast-in-fast-out"
       >
         <v-card-text>
           <p class="display-1 text--primary">
