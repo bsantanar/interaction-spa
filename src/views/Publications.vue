@@ -78,6 +78,34 @@
                                     </v-list-item-group>
                                 </v-list>
                             </v-sheet>
+                            <v-sheet 
+                            class="mt-3"
+                                rounded="lg"
+                                elevation="1"
+                            >
+                                <v-list color="transparent"
+                                >
+                                    <v-subheader>{{this.$parent.$parent.$parent.language.filterProject}}</v-subheader>
+                                    <v-list-item-group
+                                        v-model="selectedProject"
+                                        color="primary"
+                                        class="text-center"
+                                        >
+                                        <v-list-item
+                                            v-for="(item, i) in projects"
+                                            :key="i"
+                                        >
+                                            <!-- <v-list-item-icon>
+                                            <v-icon v-text="item.icon"></v-icon>
+                                            </v-list-item-icon> -->
+
+                                            <v-list-item-content>
+                                            <v-list-item-title v-text="item.name"></v-list-item-title>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </v-list-item-group>
+                                </v-list>
+                            </v-sheet>
                         </div>
                     </v-col>
                     <v-col
@@ -142,9 +170,11 @@ export default {
     data: () => ({
         selectedItem: null,
         selectedCategory: null,
+        selectedProject: null,
         years: [],
         cards: [],
         categories: [],
+        projects: [],
         loading: true,
         errored: false
     }),
@@ -159,6 +189,9 @@ export default {
                 this.categories = this.cards.flatMap(c => c.category)
                             .filter((v, i, a) => 
                             a.findIndex(t =>  t._id === v._id) === i)
+                this.projects = this.cards.flatMap(c => c.projectId)
+                            .filter((v, i, a) => 
+                            a.findIndex(t =>  t._id === v._id) === i)
             })
             .catch(err => {
                 console.error("axios err", err)
@@ -168,8 +201,17 @@ export default {
     },
     computed: {
         filterPublications: function(){
-            if(!this.years[this.selectedItem]) return this.cards
-            return this.cards.filter(c => c.year == this.years[this.selectedItem])
+            if(!this.years[this.selectedItem] && !this.projects[this.selectedProject]) return this.cards
+            let newCards = []
+            if(typeof this.selectedProject === 'number') {
+                let project = this.projects[this.selectedProject]
+                newCards = this.cards.filter(c => 
+                        c.projectId.some(p => p._id === project._id))
+            } else newCards = this.cards
+            if(typeof this.selectedItem === 'number') {
+                newCards = newCards.filter(c => c.year == this.years[this.selectedItem])
+            }
+            return newCards
         },
         filterCategories: function(){
             if(typeof this.selectedCategory === 'number') return [this.categories[this.selectedCategory]]
