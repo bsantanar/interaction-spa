@@ -214,7 +214,7 @@
     <v-row class="text-center">
       <v-card
         v-if="revealMission"
-        class="transition-fast-in-fast-out"
+        class="transition-fast-in-fast-out v-card--reveal-expand"
       >
         <v-card-text>
           <p class="display-1 text--primary">
@@ -229,7 +229,7 @@
     <v-row class="text-center">
       <v-card
         v-if="revealObjective"
-        class="transition-fast-in-fast-out"
+        class="transition-fast-in-fast-out v-card--reveal-expand"
       >
         <v-card-text>
           <p class="display-1 text--primary">
@@ -244,7 +244,7 @@
     <v-row class="text-center">
       <v-card
         v-if="revealPurpose"
-        class="transition-fast-in-fast-out"
+        class="transition-fast-in-fast-out v-card--reveal-expand"
       >
         <v-card-text>
           <p class="display-1 text--primary">
@@ -328,9 +328,10 @@ export default {
 }
 
 .v-card--reveal-expand {
-  bottom: 0;
+  margin-bottom: 10px;
+  /* bottom: 0;
   opacity: 1 !important;
-  position: absolute;
+  position: absolute; */
   width: 100%;
 }
 
