@@ -71,7 +71,7 @@ export default {
                         ...r,
                         image: r.image? '' + Buffer.from(r.image) : undefined
                     }
-                });
+                }).sort((a, b) => b.yearInit - a.yearInit);
             })
             .catch(err => {
                 console.error("axios err", err)

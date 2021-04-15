@@ -40,6 +40,7 @@ article {
   margin-right: calc(var(--size) / 2);
 	color: #fff;
 	overflow: hidden;
+	transition: .7s;
 }
 article:nth-child(2n) {margin: calc(var(--size) * -.5) calc(var(--size) * -.25) 0 calc(var(--size) * -.75);}
 article::before {
@@ -63,7 +64,16 @@ img {
 	clip-path: inherit;
 	z-index:  10;
 }
-article:hover img {transform: translate(-50%, -50%) rotate(-110deg);}
+article:hover {
+	width: calc(var(--size) * 1.4);
+	height: calc(var(--size) * 1.4);
+	transition: .7s;
+}
+img:hover {
+	width: calc(var(--size) * 1.4);
+	height: calc(var(--size) * 1.4);
+	transition: .5s;
+}
 h2 {font-size: 100%;}
 
 @media only screen and (max-width: 600px) {

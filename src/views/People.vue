@@ -28,48 +28,64 @@
           />
         </section>
         <v-container style="max-width: 1200px;">
-          <v-row 
+          <div
           v-for="category in categories"
           :key="category"
           >
-            <v-col>
+
+          <v-row 
+          >
               <h1>{{category}}</h1>
-            <v-list three-line elevation="2">
-              <v-subheader
-              >{{category}}</v-subheader>
+          </v-row>
+          <v-row>
             <template v-for="(item, index) in people">
 
-              <v-divider 
-              v-if="item.category.some(c => c.name == category)"
-              :key="index"></v-divider>
-              <v-list-item
-                v-if="item.category.some(c => c.name == category)"
-                :key="item._id"
-              >
-                <v-list-item-avatar>
-                  <img alt :src="item.image" />
-                </v-list-item-avatar>
+                <v-col
+                    cols="4"
+                    :key="index"
+                      v-if="item.category.some(c => c.name == category)">
+                    <v-card
+                      min-height="200px"
+                    >
+                    <v-card-title>
+                      <span class="title font-weight-light">
+                        {{item.fullName + ' - ' + 
+                      item.contributionDate.substr(0, 10)}}</span>
+                    </v-card-title>
 
-                <v-list-item-content>
-                  <v-list-item-title 
-                  v-html="item.fullName + ' - ' + 
-                  item.contributionDate.substr(0, 10)">
+                    <v-card-text class="font-weight-bold">
+                      {{item.degree + '. ' + 
+                      item.description + '. ' +
+                      'Contact: ' +
+                      item.email + '. '}}
+                    </v-card-text>
 
-                  </v-list-item-title>
-                  <v-list-item-subtitle 
-                  v-html="item.degree + '. ' + 
-                  item.description + '. ' +
-                  'Contact: ' +
-                  item.email + '. ' +
-                  `${item.link ? `${item.link}. ` : ''}`"
-                  >
-                  </v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
+                    <v-card-actions>
+                      <v-list-item class="grow">
+                        <v-list-item-avatar color="grey darken-3">
+                          <v-img
+                            class="elevation-6"
+                            :src="item.image"
+                          ></v-img>
+                        </v-list-item-avatar>
+                        <v-list-item-content>
+                          <v-list-item-title>
+                        <v-btn
+                            v-if="item.link"
+                            :href="item.link"
+                            color="primary darken-2"
+                            outlined
+                        >
+                            Link
+                        </v-btn></v-list-item-title>
+                        </v-list-item-content>
+                      </v-list-item>
+                    </v-card-actions>
+                  </v-card>
+                </v-col>
             </template>
-            </v-list>
-            </v-col>
-          </v-row>
+            </v-row>
+          </div>
         </v-container>
       </div>
       
@@ -132,16 +148,16 @@ export default {
 	--size: calc(calc(90vw / var(--Nhexa)) - var(--gap));
 }
 @media only screen and (min-width: 1100px) {
-  :root {--Nhexa: 6;}
-  section {margin: calc(var(--size) * .6) calc(var(--size) * .75) 0;}
+  :root {--Nhexa: 10;}
+  section {margin: calc(var(--size) * .6) calc(var(--size) * 1.8) 0;}
 }
 @media only screen and (max-width: 1100px) {
-	:root {--Nhexa: 4;}
-  section {margin: calc(var(--size) * .6) calc(var(--size) * .55) 0;}
+	:root {--Nhexa: 6;}
+  section {margin: calc(var(--size) * .6) calc(var(--size) * .9) 0;}
 }
 @media only screen and (max-width: 600px) {
-	:root {--Nhexa: 2;}
-  section {margin: calc(var(--size) * .6) calc(var(--size) * .15) 0;}
+	:root {--Nhexa: 4;}
+  section {margin: calc(var(--size) * .6) calc(var(--size) * .6) 0;}
 }
 html {
 	background: #e9e9e7;

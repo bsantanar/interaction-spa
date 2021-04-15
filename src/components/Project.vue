@@ -5,37 +5,47 @@
         class="ma-3 mb-2"
     >
         <v-img
+        min-height="300"
         max-height="300"
         v-if="project.image"
         :src="project.image"
         ></v-img>
         <v-img
+        min-height="300"
         max-height="300"
         v-else
         src="@/assets/default.jpg"
         ></v-img>
 
+        <v-card-text>
+        <div>{{project.yearEnd ? 
+            `${project.yearInit} - ${project.yearEnd}`
+             : `${project.yearInit}`}}</div>
+        <p class="display-1 text--primary">
+            {{project.name}}
+        </p>
+        <!-- <p>adjective</p> -->
+        </v-card-text>
         <v-card-title>
-        {{project.name}}
         </v-card-title>
 
         <v-card-actions>
-        <v-btn
-            :href="project.link"
-            color="primary darken-2"
-            text
-        >
-            {{this.$parent.$parent.$parent.$parent.language.learn}}
-        </v-btn>
+            <v-btn
+                :href="project.link"
+                color="primary darken-2"
+                text
+            >
+                {{this.$parent.$parent.$parent.$parent.language.learn}}
+            </v-btn>
 
-        <v-spacer></v-spacer>
+            <v-spacer></v-spacer>
 
-        <v-btn
-            icon
-            @click="show = !show"
-        >
-            <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
-        </v-btn>
+            <v-btn
+                icon
+                @click="show = !show"
+            >
+                <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+            </v-btn>
         </v-card-actions>
 
         <v-expand-transition>
