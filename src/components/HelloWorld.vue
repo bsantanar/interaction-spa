@@ -50,7 +50,7 @@
       </v-col>
     </v-row>
     <v-row class="text-center">
-      <v-col>
+      <v-col cols="12" sm="4">
         <!-- <v-hover v-slot="{ hover }"> -->
           <v-card
             class="mx-auto"
@@ -104,7 +104,7 @@
         <!-- </v-hover> -->
       </v-col>
       
-      <v-col>
+      <v-col cols="12" sm="4">
         <!-- <v-hover v-slot="{ hover }"> -->
           <v-card
             class="mx-auto"
@@ -157,7 +157,7 @@
           </v-card>
         <!-- </v-hover> -->
       </v-col>
-      <v-col>
+      <v-col cols="12" sm="4">
         <!-- <v-hover v-slot="{ hover }"> -->
           <v-card
             class="mx-auto"

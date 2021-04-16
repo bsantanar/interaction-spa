@@ -1,5 +1,6 @@
 <template>
-    <v-col cols="4">
+    <v-col 
+    lg="4" sm="6" cols="12">
 
     <v-card
         class="ma-3 mb-2"
@@ -17,18 +18,14 @@
         src="@/assets/default.jpg"
         ></v-img>
 
-        <v-card-text>
-        <div>{{project.yearEnd ? 
-            `${project.yearInit} - ${project.yearEnd}`
-             : `${project.yearInit}`}}</div>
-        <p class="display-1 text--primary">
-            {{project.name}}
-        </p>
-        <!-- <p>adjective</p> -->
-        </v-card-text>
         <v-card-title>
+            {{project.name}}
         </v-card-title>
-
+        <v-card-subtitle>
+            {{project.yearEnd ? 
+            `${project.yearInit} - ${project.yearEnd}`
+             : `${project.yearInit}`}}
+        </v-card-subtitle>
         <v-card-actions>
             <v-btn
                 :href="project.link"
