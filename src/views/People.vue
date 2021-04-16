@@ -33,56 +33,17 @@
           :key="category"
           >
 
-          <v-row 
+          <v-row class="mt-3"
           >
               <h1>{{category}}</h1>
           </v-row>
           <v-row>
             <template v-for="(item, index) in people">
-
-                <v-col
-                    cols="4"
-                    :key="index"
-                      v-if="item.category.some(c => c.name == category)">
-                    <v-card
-                      min-height="200px"
-                    >
-                    <v-card-title>
-                      <span class="title font-weight-light">
-                        {{item.fullName + ' - ' + 
-                      item.contributionDate.substr(0, 10)}}</span>
-                    </v-card-title>
-
-                    <v-card-text class="font-weight-bold">
-                      {{item.degree + '. ' + 
-                      item.description + '. ' +
-                      'Contact: ' +
-                      item.email + '. '}}
-                    </v-card-text>
-
-                    <v-card-actions>
-                      <v-list-item class="grow">
-                        <v-list-item-avatar color="grey darken-3">
-                          <v-img
-                            class="elevation-6"
-                            :src="item.image"
-                          ></v-img>
-                        </v-list-item-avatar>
-                        <v-list-item-content>
-                          <v-list-item-title>
-                        <v-btn
-                            v-if="item.link"
-                            :href="item.link"
-                            color="primary darken-2"
-                            outlined
-                        >
-                            Link
-                        </v-btn></v-list-item-title>
-                        </v-list-item-content>
-                      </v-list-item>
-                    </v-card-actions>
-                  </v-card>
-                </v-col>
+              <Publication 
+                :key="index"
+                v-if="item.category.some(c => c.name == category)"
+                :item="item"
+              />
             </template>
             </v-row>
           </div>
@@ -95,12 +56,14 @@
 </template>
 <script>
 import HoneyComb from "../components/HoneyComb.vue";
+import Publication from "../components/Publication.vue"
 import axios from 'axios'
 
 export default {
     name: "People",
     components: {
-      HoneyComb
+      HoneyComb,
+      Publication
     },
     // updated: function () {
     // },
@@ -111,9 +74,17 @@ export default {
             this.people = res.data.data
             this.people = this.people.map( r => {
                   return {
-                      ...r,
-                      image: r.image ? '' + Buffer.from(r.image) : undefined
+                    ...r,
+                    image: r.image ? '' + Buffer.from(r.image) : undefined,
+                    contributionDate: Date.parse(r.contributionDate)
                   }
+            }).sort((a, b) => b.contributionDate - a.contributionDate)
+            .map(p => {
+              return {
+                ...p,
+                contributionDate: new Date(p.contributionDate).toLocaleString()
+              }
+
             })
                 this.categories = this.people.flatMap(p => p.category)
                             .filter((v, i, a) => 
@@ -134,6 +105,12 @@ export default {
       people: [],
       categories: []
     }),
+    methods: {
+        filterMembers: function(category){
+            return this.people
+            .filter(p => p.category.some(c => c.name == category))
+        }
+    }
 
 }
 </script>
@@ -148,16 +125,16 @@ export default {
 	--size: calc(calc(90vw / var(--Nhexa)) - var(--gap));
 }
 @media only screen and (min-width: 1100px) {
-  :root {--Nhexa: 10;}
-  section {margin: calc(var(--size) * .6) calc(var(--size) * 1.8) 0;}
+  :root {--Nhexa: 14;}
+  section {margin: calc(var(--size) * .6) calc(var(--size) * 2.7) 0;}
 }
 @media only screen and (max-width: 1100px) {
-	:root {--Nhexa: 6;}
-  section {margin: calc(var(--size) * .6) calc(var(--size) * .9) 0;}
+	:root {--Nhexa: 10;}
+  section {margin: calc(var(--size) * .6) calc(var(--size) * 1.8) 0;}
 }
 @media only screen and (max-width: 600px) {
-	:root {--Nhexa: 4;}
-  section {margin: calc(var(--size) * .6) calc(var(--size) * .6) 0;}
+	:root {--Nhexa: 8;}
+  section {margin: calc(var(--size) * .6) calc(var(--size) * 1.4) 0;}
 }
 html {
 	background: #e9e9e7;

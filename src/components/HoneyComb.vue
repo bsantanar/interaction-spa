@@ -1,9 +1,9 @@
 <template>
     <article :style="background">
-		<figure>
+		<!-- <figure v-if="!person.image">
 		<h2>{{person.fullName}}</h2>
 			<p>{{person.degree}}</p>
-		</figure>
+		</figure> -->
 		<img v-if="person.image" alt :src="person.image" :style="img" />
 		<img v-else alt src="@/assets/default.jpg" :style="img" />
 	</article>
@@ -14,7 +14,7 @@ export default {
     props: ["person"],
 	computed: {
 		img(){
-			if(!this.person.active) return {"opacity": "80%"}
+			if(!this.person.active) return {"filter": "grayscale(100%)"}
 			return {};
 		},
 		background(){
@@ -65,13 +65,13 @@ img {
 	z-index:  10;
 }
 article:hover {
-	width: calc(var(--size) * 1.4);
-	height: calc(var(--size) * 1.4);
+	width: calc(var(--size) * 1.7);
+	height: calc(var(--size) * 1.7);
 	transition: .7s;
 }
 img:hover {
-	width: calc(var(--size) * 1.4);
-	height: calc(var(--size) * 1.4);
+	width: calc(var(--size) * 1.7);
+	height: calc(var(--size) * 1.7);
 	transition: .5s;
 }
 h2 {font-size: 100%;}

@@ -142,10 +142,8 @@
                             :card="card"
                             class="ma-5">
                                 <li v-if="card.category.some(c => c.name == category.name)">
-                                    {{card.author}}({{card.year}})
-                                    .{{card.title}}.{{card.description}}
-                                    {{card.editorial ? `[${card.editorial}]` : ''}}
-                                    <a v-if="card.doi" :href="card.doi">DOI</a>
+                                    {{card.author + ' '}}({{card.year}}). {{card.title}}. {{card.description}}. {{card.editorial ? `[${card.editorial}]` : ''}}
+                                    <a v-if="card.doi" :href="card.doi" target="_blank">DOI</a>
                                 </li>
                             </ul>
                         </div>
@@ -183,6 +181,7 @@ export default {
             .get(`${process.env.VUE_APP_API_URL}/publication/`)
             .then(res => {
                 this.cards = res.data.data
+                                .sort((a, b) => b.year - a.year)
                 this.years = this.cards.map( c => c.year )
                                 .filter((value, index, self) => self.indexOf(value) === index)
                                 .sort((a, b) => a - b)

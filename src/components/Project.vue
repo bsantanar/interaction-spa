@@ -32,6 +32,7 @@
         <v-card-actions>
             <v-btn
                 :href="project.link"
+                target="_blank"
                 color="primary darken-2"
                 text
             >
