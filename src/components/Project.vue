@@ -24,7 +24,7 @@
         <v-card-subtitle>
             {{project.yearEnd ? 
             `${project.yearInit} - ${project.yearEnd}`
-             : `${project.yearInit}`}}
+             : `${project.yearInit} - Present`}}
         </v-card-subtitle>
         <v-card-actions>
             <v-btn

@@ -4,6 +4,7 @@ node_modules
 package-lock.json
 vue.config.js
 ecosystem.config.js
+/src/assets
 
 
 # local env files

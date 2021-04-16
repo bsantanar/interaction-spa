@@ -27,7 +27,7 @@
             :person="person"
           />
         </section>
-        <v-container style="max-width: 1200px;">
+        <v-container style="max-width: 1200px;" class="mb-5">
           <div
           v-for="category in categories"
           :key="category"
@@ -39,7 +39,7 @@
           </v-row>
           <v-row>
             <template v-for="(item, index) in people">
-              <Publication 
+              <Member 
                 :key="index"
                 v-if="item.category.some(c => c.name == category)"
                 :item="item"
@@ -56,14 +56,14 @@
 </template>
 <script>
 import HoneyComb from "../components/HoneyComb.vue";
-import Publication from "../components/Publication.vue"
+import Member from "../components/Member.vue"
 import axios from 'axios'
 
 export default {
     name: "People",
     components: {
       HoneyComb,
-      Publication
+      Member
     },
     // updated: function () {
     // },
@@ -82,7 +82,7 @@ export default {
             .map(p => {
               return {
                 ...p,
-                contributionDate: new Date(p.contributionDate).toLocaleString()
+                contributionDate: new Date(p.contributionDate).toISOString()
               }
 
             })

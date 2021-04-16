@@ -20,6 +20,7 @@
                 <v-img
                 class="elevation-6"
                 :src="item.image"
+                :style="img"
                 ></v-img>
             </v-list-item-avatar>
             <v-list-item-content>
@@ -71,6 +72,12 @@
     props: ['item'],
     data: () => ({
       show: false
-    })
+    }),
+	computed: {
+		img(){
+			if(!this.item.active) return {"filter": "grayscale(100%)"}
+			return {};
+		}
+	}
   }
 </script>

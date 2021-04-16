@@ -1,16 +1,15 @@
 <template>
   <v-container style="max-width: 1200px;">
     <v-row class="text-center">
-      <v-hover v-slot="{ hover }">
             <v-card
-              :elevation="hover ? 12 : 2"
-              :class="{ 'on-hover': hover }"
+              elevation="12"
             >
               <v-img
                 :src="require(`../assets/${info.header}`)"
                 max-height="400"
+                min-width="100%"
               >
-                <v-expand-transition>
+                <!-- <v-expand-transition>
                   <div
                     v-if="!hover"
                     class="d-flex transition-fast-in-fast-out primary darken-2 v-card--reveal display-3 white--text"
@@ -18,10 +17,9 @@
                   >
                     {{getText('title')}}
                   </div>
-                </v-expand-transition>
+                </v-expand-transition> -->
               </v-img>
             </v-card>
-          </v-hover>
     </v-row>
     <v-row>
       <v-col
