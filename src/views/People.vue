@@ -28,25 +28,119 @@
           />
         </section>
         <v-container style="max-width: 1200px;" class="mb-5">
-          <div
-          v-for="category in categories"
-          :key="category"
-          >
-
-          <v-row class="mt-3"
-          >
-              <h1>{{category}}</h1>
-          </v-row>
           <v-row>
-            <template v-for="(item, index) in people">
-              <Member 
-                :key="index"
-                v-if="item.category.some(c => c.name == category)"
-                :item="item"
-              />
-            </template>
+            <v-col
+                cols="12"
+                sm="4"
+                md="2"
+                class="mt-15"
+            >
+              <v-sheet
+                  rounded="lg"
+                  elevation="1"
+              >
+                <v-list color="transparent"
+                >
+                  <v-subheader>{{this.$parent.$parent.$parent.language.filter}}</v-subheader>
+                  <v-list-item-group
+                    v-model="selectedItem"
+                    color="primary"
+                    class="text-center"
+                    >
+                    <v-list-item
+                        v-for="(item, i) in years"
+                        :key="i"
+                    >
+                      <v-list-item-content>
+                      <v-list-item-title v-text="item"></v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list-item-group>
+                </v-list>
+              </v-sheet>
+              <v-sheet 
+                  class="mt-3"
+                      rounded="lg"
+                      elevation="1"
+                  >
+                    <v-list color="transparent"
+                    >
+                      <v-subheader>{{this.$parent.$parent.$parent.language.filterCategory}}</v-subheader>
+                      <v-list-item-group
+                        v-model="selectedCategory"
+                        color="primary"
+                        class="text-center"
+                        >
+                        <v-list-item
+                            v-for="(item, i) in categories"
+                            :key="i"
+                        >
+                          <v-list-item-content>
+                          <v-list-item-title v-text="item"></v-list-item-title>
+                          </v-list-item-content>
+                        </v-list-item>
+                      </v-list-item-group>
+                    </v-list>
+                </v-sheet>
+                <v-sheet 
+                  class="mt-3"
+                  rounded="lg"
+                  elevation="1"
+                >
+                  <v-list color="transparent"
+                  >
+                    <v-subheader>{{this.$parent.$parent.$parent.language.filterProject}}</v-subheader>
+                    <v-list-item-group
+                      v-model="selectedProject"
+                      color="primary"
+                      class="text-center"
+                      >
+                        <v-list-item
+                          v-for="(item, i) in projects"
+                          :key="i"
+                        >
+                          <!-- <v-list-item-icon>
+                          <v-icon v-text="item.icon"></v-icon>
+                          </v-list-item-icon> -->
+
+                          <v-list-item-content>
+                          <v-list-item-title v-text="item.name"></v-list-item-title>
+                          </v-list-item-content>
+                        </v-list-item>
+                    </v-list-item-group>
+                  </v-list>
+                </v-sheet>
+            </v-col>
+            <v-col
+                cols="12"
+                md="10"
+                sm="8"
+            >
+              <div
+                v-for="category in filterCategories"
+                :key="category"
+              >
+
+                <v-row class="mt-3"
+                  v-if="filterMembers
+                          .find(p => 
+                          p.category
+                          .some(c => c.name == category))"
+                >
+                  <h1>{{category}}</h1>
+                </v-row>
+                <v-row>
+                  <template v-for="(item, index) in filterMembers">
+                    <Member 
+                      :key="index"
+                      v-if="item.category.some(c => c.name == category)"
+                      :item="item"
+                    />
+                  </template>
+                </v-row>
+              </div>
+            </v-col>
             </v-row>
-          </div>
         </v-container>
       </div>
       
@@ -65,8 +159,19 @@ export default {
       HoneyComb,
       Member
     },
-    // updated: function () {
-    // },
+    data: () => ({
+      root: null,
+      loading: true,
+      errored: false,
+      hidden: true,
+      people: [],
+      categories: [],
+      years: [],
+      projects: [],
+      selectedItem: null,
+      selectedProject: null,
+      selectedCategory: null
+    }),
     mounted() {
       axios
           .get(`${process.env.VUE_APP_API_URL}/member/`)
@@ -79,17 +184,24 @@ export default {
                     contributionDate: Date.parse(r.contributionDate)
                   }
             }).sort((a, b) => b.contributionDate - a.contributionDate)
-            .map(p => {
-              return {
-                ...p,
-                contributionDate: new Date(p.contributionDate).toISOString()
-              }
+              .map(p => {
+                return {
+                  ...p,
+                  contributionDate: new Date(p.contributionDate).toISOString()
+                }
 
-            })
-                this.categories = this.people.flatMap(p => p.category)
-                            .filter((v, i, a) => 
-                            a.findIndex(t =>  t._id === v._id) === i)
-                            .map( p => p.name)
+              })
+            this.categories = this.people.flatMap(p => p.category)
+                        .filter((v, i, a) => 
+                        a.findIndex(t =>  t._id === v._id) === i)
+                        .map( p => p.name)
+            this.projects = this.people.flatMap(c => c.projectsIds)
+                        .filter((v, i, a) => 
+                        a.findIndex(t =>  t._id === v._id) === i)
+            this.years = this.people
+                          .map(p => new Date(p.contributionDate)
+                          .getFullYear())
+                          .filter((v, i, a) => a.indexOf(v) === i)
           })
           .catch(err => {
               console.error("axios err", err)
@@ -97,19 +209,24 @@ export default {
           })
           .finally(() => this.loading = false)
     },
-    data: () => ({
-      root: null,
-      loading: true,
-      errored: false,
-      hidden: true,
-      people: [],
-      categories: []
-    }),
-    methods: {
-        filterMembers: function(category){
-            return this.people
-            .filter(p => p.category.some(c => c.name == category))
-        }
+    computed: {
+      filterMembers: function(){
+          if(!this.years[this.selectedItem] && !this.projects[this.selectedProject]) return this.people
+          let newCards = []
+          if(typeof this.selectedProject === 'number') {
+              let project = this.projects[this.selectedProject]
+              newCards = this.people.filter(c => 
+                      c.projectsIds.some(p => p._id === project._id))
+          } else newCards = this.people
+          if(typeof this.selectedItem === 'number') {
+              newCards = newCards.filter(c => new Date(c.contributionDate).getFullYear() == this.years[this.selectedItem])
+          }
+          return newCards
+      },
+      filterCategories: function(){
+          if(typeof this.selectedCategory === 'number') return [this.categories[this.selectedCategory]]
+          return this.categories
+      }
     }
 
 }
