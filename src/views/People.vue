@@ -194,6 +194,7 @@ export default {
             this.categories = this.people.flatMap(p => p.category)
                         .filter((v, i, a) => 
                         a.findIndex(t =>  t._id === v._id) === i)
+                        .sort((a, b) => a.priority - b.priority)
                         .map( p => p.name)
             this.projects = this.people.flatMap(c => c.projectsIds)
                         .filter((v, i, a) => 
