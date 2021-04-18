@@ -63,7 +63,7 @@ export default {
     },
     mounted() {
         axios
-            .get(`${process.env.VUE_APP_API_URL}/project/`)
+            .get(`${process.env.VUE_APP_API_URL}/project/?personalPage=false`)
             .then(res => {
                 this.resources = res.data.data
                 this.resources = this.resources.map( r => {

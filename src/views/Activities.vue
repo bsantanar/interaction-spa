@@ -11,8 +11,8 @@
                 <v-row>
                     <v-col
                         cols="12"
-                        sm="12"
-                        lg="2"
+                        sm="4"
+                        md="2"
                     >
                         <div v-if="loading">
                             <v-skeleton-loader
@@ -37,10 +37,6 @@
                                         v-for="(item, i) in years"
                                         :key="i"
                                     >
-                                        <!-- <v-list-item-icon>
-                                        <v-icon v-text="item.icon"></v-icon>
-                                        </v-list-item-icon> -->
-
                                         <v-list-item-content>
                                         <v-list-item-title v-text="item"></v-list-item-title>
                                         </v-list-item-content>
@@ -65,10 +61,6 @@
                                             v-for="(item, i) in categories"
                                             :key="i"
                                         >
-                                            <!-- <v-list-item-icon>
-                                            <v-icon v-text="item.icon"></v-icon>
-                                            </v-list-item-icon> -->
-
                                             <v-list-item-content>
                                             <v-list-item-title v-text="item.name"></v-list-item-title>
                                             </v-list-item-content>
@@ -79,8 +71,8 @@
                     </v-col>
                     <v-col
                         cols="12"
-                        lg="10"
-                        sm="12"
+                        md="10"
+                        sm="8"
                     >
                         <div v-if="loading">
                             <v-skeleton-loader

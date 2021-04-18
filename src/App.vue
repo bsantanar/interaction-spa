@@ -27,6 +27,7 @@
         <v-btn
           to="/"
           text
+          color="secondary"
         >
           <span class="mr-2">{{language.home}}</span>
           <!-- <v-icon>mdi-open-in-new</v-icon> -->
@@ -34,6 +35,7 @@
         <v-btn
           to="/publications"
           text
+          color="secondary"
         >
           <span class="mr-2">{{language.publications}}</span>
           <!-- <v-icon>mdi-open-in-new</v-icon> -->
@@ -41,6 +43,7 @@
         <v-btn
           to="/people"
           text
+          color="secondary"
         >
           <span class="mr-2">{{language.people}}</span>
           <!-- <v-icon>mdi-open-in-new</v-icon> -->
@@ -48,6 +51,7 @@
         <v-btn
           to="/projects"
           text
+          color="secondary"
         >
           <span class="mr-2">{{language.projects}}</span>
           <!-- <v-icon>mdi-open-in-new</v-icon> -->
@@ -55,6 +59,7 @@
         <v-btn
           to="/activities"
           text
+          color="secondary"
         >
           <span class="mr-2">{{language.activities}}</span>
           <!-- <v-icon>mdi-open-in-new</v-icon> -->
@@ -62,6 +67,7 @@
         <v-btn
           to="/contact"
           text
+          color="secondary"
         >
           <span class="mr-2">{{language.contact}}</span>
           <!-- <v-icon>mdi-open-in-new</v-icon> -->
@@ -109,29 +115,29 @@
         >
           <v-list-item-group
             v-model="group"
-            active-class="primary text--lighten-1"
+            active-class="secondary text--lighten-1"
           >
-            <v-list-item to="/">
+            <v-list-item color="secondary" to="/">
               <v-list-item-title>{{language.home}}</v-list-item-title>
             </v-list-item>
 
-            <v-list-item to="/publications">
+            <v-list-item color="secondary" to="/publications">
               <v-list-item-title>{{language.publications}}</v-list-item-title>
             </v-list-item>
 
-            <v-list-item to="/people">
+            <v-list-item color="secondary" to="/people">
               <v-list-item-title>{{language.people}}</v-list-item-title>
             </v-list-item>
 
-            <v-list-item to="/projects">
+            <v-list-item color="secondary" to="/projects">
               <v-list-item-title>{{language.projects}}</v-list-item-title>
             </v-list-item>
 
-            <v-list-item to="/activities">
+            <v-list-item color="secondary" to="/activities">
               <v-list-item-title>{{language.activities}}</v-list-item-title>
             </v-list-item>
 
-            <v-list-item to="/contact">
+            <v-list-item color="secondary" to="/contact">
               <v-list-item-title>{{language.contact}}</v-list-item-title>
             </v-list-item>
             <v-list-group
@@ -145,6 +151,7 @@
               </template>
 
               <v-list-item
+                color="secondary"
                 v-for="item in languages"
                 :key="item"
                 link
