@@ -12,7 +12,7 @@
                     <v-col
                         cols="12"
                         sm="12"
-                        lg="2"
+                        md="2"
                     >
                         <div v-if="loading">
                             <v-skeleton-loader
@@ -110,7 +110,7 @@
                     </v-col>
                     <v-col
                         cols="12"
-                        lg="10"
+                        md="10"
                         sm="12"
                     >
                         <div v-if="loading">
@@ -188,6 +188,7 @@ export default {
                 this.categories = this.cards.flatMap(c => c.category)
                             .filter((v, i, a) => 
                             a.findIndex(t =>  t._id === v._id) === i)
+                            .sort((a, b) => a.priority - b.priority)
                 this.projects = this.cards.flatMap(c => c.projectId)
                             .filter((v, i, a) => 
                             a.findIndex(t =>  t._id === v._id) === i)
