@@ -44,14 +44,16 @@ export default {
 <style>
 article {
 	background: #0D47A1;
-  width: var(--size); 
-  height: calc(var(--size) / 1.1111);
+	width: var(--size); 
+	height: calc(var(--size) / 1.1111);
 	clip-path: url(#hexagono);
-  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
-  margin-right: calc(var(--size) / 2);
+	clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+	margin-right: calc(var(--size) / 2);
 	color: #fff;
 	overflow: hidden;
 	transition: .7s;
+	position: relative;
+	z-index: 0;
 }
 article:nth-child(2n) {margin: calc(var(--size) * -.5) calc(var(--size) * -.25) 0 calc(var(--size) * -.75);}
 article::before {
@@ -78,7 +80,8 @@ img {
 article:hover {
 	width: calc(var(--size) * 1.7);
 	height: calc(var(--size) * 1.7);
-	transition: .7s;
+	transition: .5s;
+	z-index: 10;
 }
 img:hover {
 	width: calc(var(--size) * 1.7);
