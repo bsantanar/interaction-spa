@@ -1,12 +1,23 @@
 <template>
-    <article :style="background">
-		<!-- <figure v-if="!person.image">
-		<h2>{{person.fullName}}</h2>
-			<p>{{person.degree}}</p>
-		</figure> -->
-		<img v-if="person.image" alt :src="person.image" :style="img" />
-		<img v-else alt src="@/assets/default.jpg" :style="img" />
-	</article>
+
+		<article :style="background">
+			<!-- <figure v-if="!person.image">
+			<h2>{{person.fullName}}</h2>
+				<p>{{person.degree}}</p>
+			</figure> -->
+			<v-tooltip v-if="person.image" bottom open-delay="400">
+			<template v-slot:activator="{ on, attrs }">
+					<img v-bind="attrs" v-on="on" alt :src="person.image" :style="img" />
+			</template>
+			<span>{{person.fullName}}</span>
+			</v-tooltip>
+			<v-tooltip v-else bottom open-delay="400">
+			<template v-slot:activator="{ on, attrs }">
+					<img v-bind="attrs" v-on="on" alt src="@/assets/default.jpg" :style="img" />
+			</template>
+			<span>{{person.fullName}}</span>
+			</v-tooltip>
+		</article>
 </template>
 <script>
 export default {
