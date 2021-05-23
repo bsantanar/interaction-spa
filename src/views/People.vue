@@ -122,12 +122,14 @@
               >
 
                 <v-row class="mt-3"
+                >
+                  <h1
                   v-if="filterMembers
                           .find(p => 
                           p.category
-                          .some(c => c.name == category))"
-                >
-                  <h1>{{category}}</h1>
+                          .some(c => c.name == category))">
+                          {{category}}
+                  </h1>
                 </v-row>
                 <v-row>
                   <template v-for="(item, index) in filterMembers">
