@@ -195,7 +195,9 @@ export default {
 
               })
             this.honeycombArray = this.people.sort(() => 0.5 - Math.random())
-                                    .slice(0, process.env.MEMBERS_MAX)
+                                    .slice(0, this.people.length > 45 ? 
+                                              this.people.length/2 :
+                                              this.people.length)
             this.categories = this.people.flatMap(p => p.category)
                         .filter((v, i, a) => 
                         a.findIndex(t =>  t._id === v._id) === i)
