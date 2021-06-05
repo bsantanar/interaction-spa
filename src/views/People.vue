@@ -22,7 +22,7 @@
 
         <section>
           <HoneyComb 
-            v-for="person in people"
+            v-for="person in honeycombArray"
             :key="person.name"
             :person="person"
           />
@@ -170,6 +170,7 @@ export default {
       categories: [],
       years: [],
       projects: [],
+      honeycombArray: [],
       selectedItem: null,
       selectedProject: null,
       selectedCategory: null
@@ -193,6 +194,8 @@ export default {
                 }
 
               })
+            this.honeycombArray = this.people.sort(() => 0.5 - Math.random())
+                                    .slice(0, this.people.length/2)
             this.categories = this.people.flatMap(p => p.category)
                         .filter((v, i, a) => 
                         a.findIndex(t =>  t._id === v._id) === i)
