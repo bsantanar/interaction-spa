@@ -210,6 +210,7 @@ export default {
                           .map(p => new Date(p.contributionDate)
                           .getFullYear())
                           .filter((v, i, a) => a.indexOf(v) === i)
+                          .sort((a, b) => b - a)
           })
           .catch(err => {
               console.error("axios err", err)

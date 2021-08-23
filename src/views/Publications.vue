@@ -184,7 +184,7 @@ export default {
                                 .sort((a, b) => b.year - a.year)
                 this.years = this.cards.map( c => c.year )
                                 .filter((value, index, self) => self.indexOf(value) === index)
-                                .sort((a, b) => a - b)
+                                .sort((a, b) => b - a)
                 this.categories = this.cards.flatMap(c => c.category)
                             .filter((v, i, a) => 
                             a.findIndex(t =>  t._id === v._id) === i)
