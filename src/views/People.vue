@@ -194,7 +194,9 @@ export default {
                 }
 
               })
-            this.honeycombArray = this.people.sort(() => 0.5 - Math.random())
+            this.honeycombArray = this.people
+                                    .filter(p => p.image != null)
+                                    .sort(() => 0.5 - Math.random())
                                     .slice(0, this.people.length > 45 ? 
                                               this.people.length/2 :
                                               this.people.length)
