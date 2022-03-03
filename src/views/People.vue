@@ -200,7 +200,6 @@ export default {
                                     .slice(0, this.people.length > 45 ? 
                                               this.people.length/2 :
                                               this.people.length)
-            console.log(this.honeycombArray);
             this.categories = this.people.flatMap(p => p.category)
                         .filter((v, i, a) => 
                         a.findIndex(t =>  t._id === v._id) === i)
